@@ -1,10 +1,15 @@
 import { defineConfig } from "vite";
 
 export default defineConfig({
-    build: {
-        manifest: true,
-        rollupOptions: {
-            input: "./src/main.ts",
+    server: {
+        port: 3000,
+        proxy: {
+            "/api": {
+                target: "http://localhost:3001",
+                changeOrigin: true,
+                secure: false,
+                rewrite: (path) => path.replace(/^\/api/, ""),
+            },
         },
     },
 });
