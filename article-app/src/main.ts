@@ -1,17 +1,14 @@
 import "./style.css";
+import { Article } from "./types/dataTypes";
 
 const testBtn = document.querySelector("#test") as HTMLButtonElement;
-
-interface Test {
-    test: string;
-}
 
 testBtn.addEventListener("click", async (e) => {
     e.preventDefault();
     try {
-        const response = await fetch("/api/test");
-        const data: Test = await response.json();
-        console.log(data.test);
+        const response = await fetch("/api/articles");
+        const data: Article[] = await response.json();
+        console.log(data);
     } catch (error) {
         if (error instanceof Error) {
             console.error(error.message);
