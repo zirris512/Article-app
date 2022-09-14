@@ -5,7 +5,7 @@ export default defineConfig({
     // ...vite configures
     server: {
         // vite server configs, for details see [vite doc](https://vitejs.dev/config/#server-host)
-        port: 3001,
+        port: 3000,
     },
     plugins: [
         ...VitePluginNode({
@@ -15,7 +15,7 @@ export default defineConfig({
             adapter: "express",
 
             // tell the plugin where is your project entry
-            appPath: "./backend/server.ts",
+            appPath: "./src/server.ts",
 
             // Optional, default: 'viteNodeApp'
             // the name of named export of you app from the appPath file
@@ -43,7 +43,6 @@ export default defineConfig({
             // }
             // }
             // swc configs, see [swc doc](https://swc.rs/docs/configuration/swcrc)
-            swcOptions: {},
         }),
     ],
 });

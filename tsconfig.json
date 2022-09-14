@@ -3,7 +3,7 @@
         "target": "ESNext",
         "useDefineForClassFields": true,
         "module": "ESNext",
-        "lib": ["ESNext"],
+        "lib": ["ESNext", "DOM"],
         "moduleResolution": "Node",
         "strict": true,
         "sourceMap": true,
@@ -15,5 +15,6 @@
         "noUnusedParameters": true,
         "noImplicitReturns": true,
         "skipLibCheck": true
-    }
+    },
+    "include": ["src", "src/server.ts"]
 }
