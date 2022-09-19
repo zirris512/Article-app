@@ -4,8 +4,7 @@ import path from "path";
 import url from "url";
 
 import router from "./routes/routes";
-import { scraper } from "./scraper/main";
-
+// 
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 const staticPath = url.fileURLToPath(new URL("..", `${import.meta.url}`));
 
@@ -21,8 +20,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use("/", router);
-
-console.log(await scraper());
 
 if (import.meta.env.PROD) {
     app.listen(3000);

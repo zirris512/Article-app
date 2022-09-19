@@ -1,9 +1,9 @@
 import puppeteer from "puppeteer";
 
-export const scraper = async () => {
+export const scraper = async (source: string) => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    await page.goto("https://blog.logrocket.com");
+    await page.goto(source);
     await page.waitForSelector(".featured-posts");
     const data = await page.$$eval(".featured-posts .card", (els) => {
         return els.map((el) => {
