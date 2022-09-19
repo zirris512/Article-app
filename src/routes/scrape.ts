@@ -6,7 +6,7 @@ import { pool } from "../db/connection";
 
 const router = Router();
 
-router.get("/scrape", async (_req, res) => {
+router.get("/", async (_req, res) => {
     const data = await pool.query("SELECT * FROM articles");
     if (data.rows.length > 0) {
         return res.send("Data already stored.");
