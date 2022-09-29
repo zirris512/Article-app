@@ -9,7 +9,7 @@ const router = Router();
 router.get("/", async (_req, res) => {
     const data = await pool.query("SELECT * FROM articles");
     if (data.rows.length > 0) {
-        return res.send("Data already stored.");
+        return res.json(data.rows);
     }
     const scrapedData = await scraper("https://blog.logrocket.com");
     const client = await pool.connect();
@@ -33,7 +33,7 @@ router.get("/", async (_req, res) => {
     } finally {
         client.release();
     }
-    return res.send("Data successfuly stored.");
+    return res.json(scrapedData);
 });
 
 export default router;

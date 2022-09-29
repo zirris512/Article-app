@@ -11,6 +11,7 @@ const staticPath = url.fileURLToPath(new URL("..", `${import.meta.url}`));
 const app = express();
 
 app.use(expressLayouts);
+app.set("layout extractScripts", true);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "./views"));
 
