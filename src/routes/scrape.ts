@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { DatabaseError } from "pg";
 
 import { scraper } from "../scraper/main";
 import { pool } from "../db/connection";
@@ -26,10 +25,7 @@ router.get("/", async (_req, res) => {
         await client.query("COMMIT");
     } catch (error) {
         await client.query("ROLLBACK");
-        if (error instanceof DatabaseError) {
-            return res.status(500).send(error.stack);
-        }
-        return res.send(error);
+        return res.status(500).send(error);
     } finally {
         client.release();
     }
