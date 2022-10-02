@@ -1,6 +1,6 @@
-import { Pool } from "pg";
+import pg from "pg";
 
-const pool = new Pool({
+const pool = new pg.Pool({
     user: import.meta.env.VITE_DB_USER,
     host: "localhost",
     database: "articles",
