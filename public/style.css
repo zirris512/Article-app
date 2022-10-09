@@ -20,12 +20,12 @@ a {
     transition: background-color 0.2s ease-in-out;
 }
 
-a.link {
+a.article-link {
     color: blue;
     padding-left: 1em;
 }
 
-a.link:hover {
+a.article-link:hover {
     color: darkgray;
 }
 
