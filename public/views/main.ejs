@@ -1,8 +1,14 @@
 <main>
-    <% if (tag) { %>
-    <h2><%= tag %></h2>
-    <% } else { %>
-    <h2>No page found</h2>
+    <h1>Articles</h1>
+    <% if (typeof articles === "object" && articles) { %> <% for(article of articles) { %>
+    <div>
+        <a href="/<%= article.id %>" class="card">
+            <h2><%= article.title %></h2>
+            <p><%= article.description %></p>
+            <a href="<%= article.link %>" class="link" target="_blank">Read more...</a>
+        </a>
+    </div>
+    <% } %> <% } else { %>
+    <h2>No articles found</h2>
     <% } %>
-    <script></script>
 </main>

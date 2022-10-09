@@ -1,15 +1,18 @@
-import { Router } from "express";
+import { pool } from "./connection";
+import type { Articles } from "../types";
 
 import { scraper } from "../scraper/main";
-import { pool } from "../db/connection";
 
-const router = Router();
-
-router.get("/", async (_req, res) => {
-    const data = await pool.query("SELECT * FROM articles");
-    if (data.rows.length > 0) {
-        return res.json(data.rows);
+export const getArticles = async (): Promise<Articles[]> => {
+    try {
+        const articles = await (await pool.query<Articles>("SELECT * FROM articles")).rows;
+        return articles;
+    } catch (error) {
+        throw error;
     }
+};
+
+export const scrapeData = async (): Promise<void> => {
     const scrapedData = await scraper("https://blog.logrocket.com");
     const client = await pool.connect();
 
@@ -25,11 +28,8 @@ router.get("/", async (_req, res) => {
         await client.query("COMMIT");
     } catch (error) {
         await client.query("ROLLBACK");
-        return res.status(500).send(error);
+        throw error;
     } finally {
         client.release();
     }
-    return res.json(scrapedData);
-});
-
-export default router;
+};
