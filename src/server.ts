@@ -3,7 +3,7 @@ import expressLayouts from "express-ejs-layouts";
 import path from "path";
 import url from "url";
 
-import router from "./routes/pages";
+import router from "./routes";
 
 const staticPath = url.fileURLToPath(new URL("..", `${import.meta.url}`));
 
