@@ -1,0 +1,11 @@
+<main>
+    <% if (typeof comments === "object" && comments) { %> <% for(comment of comments) { %>
+    <p><%= comment.comment %></p>
+    <% } %> <% } else { %>
+    <p>Be the first to comment!</p>
+    <% } %>
+    <form id="comment-form">
+        <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+    </form>
+    <script></script>
+</main>
