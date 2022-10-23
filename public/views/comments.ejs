@@ -1,11 +1,38 @@
 <main>
-    <% if (typeof comments === "object" && comments) { %> <% for(comment of comments) { %>
-    <p><%= comment.comment %></p>
-    <% } %> <% } else { %>
-    <p>Be the first to comment!</p>
-    <% } %>
+    <div id="comment-section">
+        <% if (typeof comments === "object" && comments) { %> <% for(comment of comments) { %>
+        <p><%= comment.comment %></p>
+        <% } %> <% } else { %>
+        <p>Be the first to comment!</p>
+        <% } %>
+    </div>
     <form id="comment-form">
         <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+        <button type="submit">Post Comment</button>
     </form>
-    <script></script>
+    <script>
+        const commentArea = document.querySelector("#comment");
+        const commentForm = document.querySelector("#comment-form");
+
+        commentForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const postId = location.pathname.substring(1);
+            const commentText = commentArea.value;
+            if (!commentText) {
+                return;
+            }
+
+            const response = await fetch(`/api/comments/${postId}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    comment: commentText,
+                }),
+            });
+            const data = await response.json();
+            location.reload();
+        });
+    </script>
 </main>
